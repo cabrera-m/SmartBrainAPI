@@ -1,7 +1,7 @@
 const handleRegister = (db, bcrypt) => (req, res) => {
   const { email, name, password } = req.body;
   if (!email || !name || !password) {
-    return res.status(400).son("Incorrect form submission");
+    return res.status(400).json("Incorrect form submission");
   }
   if (
     !password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/)
