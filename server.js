@@ -1,3 +1,11 @@
+const dotenv = require('dotenv');
+dotenv.config()
+
+const { createClient } = require('@supabase/supabase-js');
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const express = require("express");
 const bcrypt = require("bcrypt-nodejs");
 const cors = require("cors");
@@ -44,6 +52,6 @@ app.put("/image", image.handleImage(db));
 
 app.post("/imageurl", image.handleApiCall);
 
-app.listen(3000, () => {
-  console.log(`Server started on port 3000`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`App is running on port ${process.env.PORT}`);
 });
