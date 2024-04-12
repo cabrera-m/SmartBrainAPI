@@ -1,11 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config()
-
-const { createClient } = require('@supabase/supabase-js');
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 const express = require("express");
 const bcrypt = require("bcrypt-nodejs");
 const cors = require("cors");
@@ -19,11 +11,12 @@ const image = require("./controllers/image");
 const db = knex({
   client: "pg",
   connection: {
-    host: "127.0.0.1",
-    port: 5432,
-    user: "",
-    password: "",
-    database: "smart-db",
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD, // You should replace this with your actual password
+    database: process.env.DB_NAME,
+    ssl: process.env.DB_SSL, // Enable SSL for secure connection
   },
 });
 
